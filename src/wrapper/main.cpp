@@ -593,6 +593,17 @@ extern "C"
 JNIEXPORT jbyteArray
 
 JNICALL
+Java_com_valhalla_valhalla_ValhallaKotlin_locate(JNIEnv *env,
+                                                       jobject thiz,
+                                                       jlong handle,
+                                                       jbyteArray jRequest) {
+    return run_jni_action(env, handle, jRequest, &ValhallaActor::locate, "locate");
+}
+
+extern "C"
+JNIEXPORT jbyteArray
+
+JNICALL
 Java_com_valhalla_valhalla_ValhallaKotlin_matrix(JNIEnv *env,
                                                        jobject thiz,
                                                        jlong handle,
@@ -630,6 +641,12 @@ std::string trace_attributes(const char *request, void* actor) {
 std::string height(const char *request, void* actor) {
     return invoke_action("height", [&]() {
         return ((ValhallaActor*) actor)->height(request);
+    });
+}
+
+std::string locate(const char *request, void* actor) {
+    return invoke_action("locate", [&]() {
+        return ((ValhallaActor*) actor)->locate(request);
     });
 }
 

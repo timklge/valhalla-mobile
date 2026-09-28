@@ -281,6 +281,17 @@ internal constructor(
   }
 
   /**
+   * Run a `locate` request supplied as JSON and return the raw response.
+   *
+   * @param requestJson A `locate` request as JSON.
+   * @return The raw response body, in whichever format the request asked for.
+   * @throws ValhallaException.Internal if the Valhalla engine returns an error response.
+   */
+  fun locateRaw(requestJson: String): String {
+    return checkForError(valhallaActor.locate(requestJson))
+  }
+
+  /**
    * Run a `sources_to_targets` request supplied as JSON and return the raw response.
    *
    * This is the escape hatch for request options [MatrixRequest] does not yet model, or a

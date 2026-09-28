@@ -92,6 +92,15 @@ public:
     std::string height(const std::string& request);
 
     /**
+     * Locate a point on the road network. This is Valhalla's `locate` action.
+     *
+     * @param request  a `locate` request as JSON. See
+     *                 https://valhalla.github.io/valhalla/api/locate/api-reference/
+     * @return         the serialized response, in whichever format the request asked for
+     */
+    std::string locate(const std::string& request);
+
+    /**
      * Compute a matrix of costs and times between every source and every target. This is
      * Valhalla's `sources_to_targets` action.
      *

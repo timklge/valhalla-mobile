@@ -75,6 +75,18 @@ final class TestValhallaWithTar: XCTestCase {
         XCTAssertEqual(response.trip.legs.first?.shape.count, 656)
     }
 
+    func testSuccessfulLocate() throws {
+        let valhalla = try Valhalla(defaultConfig)
+        let request = #"{"locations":[{"lat":42.5063,"lon":1.5218}],"costing":"auto"}"#
+
+        let raw = try valhalla.locate(rawRequest: request)
+        let response = try XCTUnwrap(
+            JSONSerialization.jsonObject(with: Data(raw.utf8)) as? [[String: Any]]
+        )
+
+        XCTAssertEqual(response.count, 1)
+    }
+
     /// The shape of a known-good route through the fixture, as a polyline with six digits of
     /// precision — which is what the trace actions expect.
     ///

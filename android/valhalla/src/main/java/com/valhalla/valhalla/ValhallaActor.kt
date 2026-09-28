@@ -14,6 +14,8 @@ internal interface ValhallaActorProviding : Closeable {
 
   fun height(request: String): String
 
+  fun locate(request: String): String
+
   fun matrix(request: String): String
 }
 
@@ -79,6 +81,9 @@ internal class ValhallaActor(
 
   /** Run a `height` request to sample heights under a shape. Same assumptions as [route]. */
   override fun height(request: String): String = perform(request, valhallaKotlin::height)
+
+  /** Run a `locate` request to find nearby road network features. Same assumptions as [route]. */
+  override fun locate(request: String): String = perform(request, valhallaKotlin::locate)
 
   /**
    * Run a `sources_to_targets` request, computing a matrix of costs and times between every

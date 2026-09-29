@@ -87,6 +87,18 @@ final class TestValhallaWithTar: XCTestCase {
         XCTAssertEqual(response.count, 1)
     }
 
+    func testSuccessfulStatus() throws {
+        let valhalla = try Valhalla(defaultConfig)
+
+        let raw = try valhalla.status(rawRequest: "{}")
+        let response = try XCTUnwrap(
+            JSONSerialization.jsonObject(with: Data(raw.utf8)) as? [String: Any]
+        )
+
+        XCTAssertNotNil(response["version"])
+        XCTAssertNotNil(response["available_actions"])
+    }
+
     /// The shape of a known-good route through the fixture, as a polyline with six digits of
     /// precision — which is what the trace actions expect.
     ///

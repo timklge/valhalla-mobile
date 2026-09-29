@@ -16,6 +16,8 @@ internal interface ValhallaActorProviding : Closeable {
 
   fun locate(request: String): String
 
+  fun status(request: String): String
+
   fun matrix(request: String): String
 }
 
@@ -84,6 +86,9 @@ internal class ValhallaActor(
 
   /** Run a `locate` request to find nearby road network features. Same assumptions as [route]. */
   override fun locate(request: String): String = perform(request, valhallaKotlin::locate)
+
+  /** Run a `status` request to inspect engine and tile status. Same assumptions as [route]. */
+  override fun status(request: String): String = perform(request, valhallaKotlin::status)
 
   /**
    * Run a `sources_to_targets` request, computing a matrix of costs and times between every

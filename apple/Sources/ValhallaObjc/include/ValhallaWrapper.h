@@ -38,6 +38,10 @@
 /// @param request a `locate` request as JSON.
 - (NSString*)locate:(NSString*)request;
 
+/// Returns engine and tile status.
+/// @param request a `status` request as JSON.
+- (NSString*)status:(NSString*)request;
+
 /// Computes a matrix of costs and times between every source and every target.
 /// @param request a `sources_to_targets` request as JSON.
 - (NSString*)matrix:(NSString*)request;

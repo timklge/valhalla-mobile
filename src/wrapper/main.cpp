@@ -604,6 +604,17 @@ extern "C"
 JNIEXPORT jbyteArray
 
 JNICALL
+Java_com_valhalla_valhalla_ValhallaKotlin_status(JNIEnv *env,
+                                                       jobject thiz,
+                                                       jlong handle,
+                                                       jbyteArray jRequest) {
+    return run_jni_action(env, handle, jRequest, &ValhallaActor::status, "status");
+}
+
+extern "C"
+JNIEXPORT jbyteArray
+
+JNICALL
 Java_com_valhalla_valhalla_ValhallaKotlin_matrix(JNIEnv *env,
                                                        jobject thiz,
                                                        jlong handle,
@@ -647,6 +658,12 @@ std::string height(const char *request, void* actor) {
 std::string locate(const char *request, void* actor) {
     return invoke_action("locate", [&]() {
         return ((ValhallaActor*) actor)->locate(request);
+    });
+}
+
+std::string status(const char *request, void* actor) {
+    return invoke_action("status", [&]() {
+        return ((ValhallaActor*) actor)->status(request);
     });
 }
 

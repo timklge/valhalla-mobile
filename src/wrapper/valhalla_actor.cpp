@@ -210,6 +210,10 @@ std::string ValhallaActor::locate(const std::string& request) {
     return run_on_deep_stack([&]() { return actor->locate(request); });
 }
 
+std::string ValhallaActor::status(const std::string& request) {
+    return run_on_deep_stack([&]() { return actor->status(request); });
+}
+
 std::string ValhallaActor::matrix(const std::string& request) {
     return run_on_deep_stack([&]() { return actor->matrix(request); });
 }

@@ -36,5 +36,7 @@ internal class ValhallaKotlin {
 
   external fun locate(handle: Long, request: ByteArray): ByteArray
 
+  external fun status(handle: Long, request: ByteArray): ByteArray
+
   external fun matrix(handle: Long, request: ByteArray): ByteArray
 }

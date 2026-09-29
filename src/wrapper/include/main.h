@@ -53,6 +53,11 @@ JNIEXPORT jbyteArray JNICALL Java_com_valhalla_valhalla_ValhallaKotlin_locate(JN
                                                 jlong handle,
                                                 jbyteArray jRequest);
 
+JNIEXPORT jbyteArray JNICALL Java_com_valhalla_valhalla_ValhallaKotlin_status(JNIEnv *env,
+                                                jobject thiz,
+                                                jlong handle,
+                                                jbyteArray jRequest);
+
 JNIEXPORT jbyteArray JNICALL Java_com_valhalla_valhalla_ValhallaKotlin_matrix(JNIEnv *env,
                                                 jobject thiz,
                                                 jlong handle,
@@ -69,6 +74,7 @@ std::string trace_route(const char *request, void* actor);
 std::string trace_attributes(const char *request, void* actor);
 std::string height(const char *request, void* actor);
 std::string locate(const char *request, void* actor);
+std::string status(const char *request, void* actor);
 std::string matrix(const char *request, void* actor);
 void* create_valhalla_actor(const char *config_path, ValhallaMobileHttpClient* http_client = nullptr);
 void delete_valhalla_actor(void* actor);

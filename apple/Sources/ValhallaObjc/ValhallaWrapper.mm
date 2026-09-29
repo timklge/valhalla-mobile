@@ -272,6 +272,13 @@ NSString* PerformAction(ActorAction action,
     }
 }
 
+- (NSString*)status:(NSString*)request
+{
+    @synchronized(self) {
+        return PerformAction(&status, request, _actor, "status");
+    }
+}
+
 - (void)close
 {
     // The same lock every action takes, so a close cannot free the actor out from

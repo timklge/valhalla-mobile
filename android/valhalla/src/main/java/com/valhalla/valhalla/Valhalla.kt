@@ -292,6 +292,17 @@ internal constructor(
   }
 
   /**
+   * Run a `status` request supplied as JSON and return the raw response.
+   *
+   * @param requestJson A `status` request as JSON.
+   * @return The raw JSON response body.
+   * @throws ValhallaException.Internal if the Valhalla engine returns an error response.
+   */
+  fun statusRaw(requestJson: String): String {
+    return checkForError(valhallaActor.status(requestJson))
+  }
+
+  /**
    * Run a `sources_to_targets` request supplied as JSON and return the raw response.
    *
    * This is the escape hatch for request options [MatrixRequest] does not yet model, or a

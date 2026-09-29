@@ -101,6 +101,15 @@ public:
     std::string locate(const std::string& request);
 
     /**
+     * Return engine and tile status. This is Valhalla's `status` action.
+     *
+     * @param request  a `status` request as JSON. See
+     *                 https://valhalla.github.io/valhalla/api/status/api-reference/
+     * @return         the serialized JSON response
+     */
+    std::string status(const std::string& request);
+
+    /**
      * Compute a matrix of costs and times between every source and every target. This is
      * Valhalla's `sources_to_targets` action.
      *

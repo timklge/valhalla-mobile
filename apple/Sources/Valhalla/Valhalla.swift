@@ -29,6 +29,8 @@ public protocol ValhallaProviding {
 
     func locate(rawRequest: String) throws -> String
 
+    func status(rawRequest: String) throws -> String
+
     func matrix(rawRequest: String) throws -> String
 
     func close()
@@ -245,6 +247,14 @@ public final class Valhalla: ValhallaProviding {
     ///   or ``ValhallaError/closed`` after ``close()``.
     public func locate(rawRequest request: String) throws -> String {
         try checkForError(try withActor { $0.locate(request) })
+    }
+
+    /// Runs a `status` request supplied as JSON and returns the raw response.
+    ///
+    /// - Throws: ``ValhallaError/valhallaError(_:_:)`` when Valhalla rejects the request,
+    ///   or ``ValhallaError/closed`` after ``close()``.
+    public func status(rawRequest request: String) throws -> String {
+        try checkForError(try withActor { $0.status(request) })
     }
 
     /// Runs a `sources_to_targets` request supplied as JSON and returns the raw response,

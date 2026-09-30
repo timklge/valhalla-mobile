@@ -80,7 +80,7 @@ dependencies {
     androidTestImplementation(libs.androidx.test.rules)
 }
 
-val archs = listOf("arm64-v8a", "armeabi-v7a", "x86_64", "x86")
+val archs = listOf("arm64-v8a", "armeabi-v7a")
 
 // Define a custom task to run the shell script
 archs.forEach { arch ->
@@ -102,15 +102,14 @@ archs.forEach { arch ->
 
 tasks.named("preBuild") {
     // Efficiently build any architecture that doesn't exist in jniLibs.
-    dependsOn("buildValhallaFor-arm64-v8a")
-    dependsOn("buildValhallaFor-armeabi-v7a")
-    dependsOn("buildValhallaFor-x86_64")
-    dependsOn("buildValhallaFor-x86")
+    archs.forEach { arch ->
+        dependsOn("buildValhallaFor-${arch}")
+    }
 }
 
 mavenPublishing {
-    publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
-    signAllPublications()
+    // publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
+    // signAllPublications()
 
     if (project.version.toString() === "unspecified") {
         throw IllegalArgumentException("Version must be specified")
@@ -148,6 +147,19 @@ mavenPublishing {
             connection.set("scm:git:https://github.com/Rallista/valhalla-mobile.git")
             developerConnection.set("scm:git:ssh://github.com/Rallista/valhalla-mobile.git")
             url.set("https://github.com/Rallista/valhalla-mobile")
+        }
+    }
+}
+
+publishing {
+    repositories {
+        maven {
+            name = "GitHub"
+            url = uri("https://maven.pkg.github.com/" + System.getenv("GITHUB_REPOSITORY"))
+            credentials {
+                username = System.getenv("GITHUB_ACTOR") ?: ""
+                password = System.getenv("GITHUB_TOKEN") ?: ""
+            }
         }
     }
 }

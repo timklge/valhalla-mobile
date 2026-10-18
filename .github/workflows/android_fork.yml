@@ -11,7 +11,7 @@ jobs:
       packages: read
     strategy:
       matrix:
-        arch: ["arm64-v8a", "armeabi-v7a"]
+        arch: ["arm64-v8a", "armeabi-v7a", "x86_64"]
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}-android-build-${{ matrix.arch }}
       cancel-in-progress: true
@@ -81,7 +81,7 @@ jobs:
       - name: Install JNI libraries
         run: |
           set -euo pipefail
-          for arch in arm64-v8a armeabi-v7a; do
+          for arch in arm64-v8a armeabi-v7a x86_64; do
             mkdir -p "android/valhalla/src/main/jniLibs/$arch"
             cp "jniLibs/libvalhalla-$arch/libvalhalla-wrapper.so" \
               "android/valhalla/src/main/jniLibs/$arch/"

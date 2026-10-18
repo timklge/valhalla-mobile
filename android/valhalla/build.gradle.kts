@@ -81,7 +81,7 @@ dependencies {
     androidTestImplementation(libs.androidx.test.rules)
 }
 
-val archs = listOf("arm64-v8a", "armeabi-v7a")
+val archs = listOf("arm64-v8a", "armeabi-v7a", "x86_64")
 
 // Define a custom task to run the shell script
 archs.forEach { arch ->

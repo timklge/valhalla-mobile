@@ -103,6 +103,10 @@ target_include_directories(valhalla-wrapper
     ${VALHALLA_SOURCE_DIR}
 )
 
+if (ANDROID AND CMAKE_BUILD_TYPE STREQUAL "Release")
+    target_link_options(valhalla-wrapper PRIVATE -Wl,--strip-all)
+endif()
+
 # Link installed headers ---------------------------------------------------------
 
 function(install_vcpkg_libs_wildcard pattern)
